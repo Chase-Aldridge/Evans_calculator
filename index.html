@@ -1,291 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Cost Savings Calculator Start -->
+<head>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- Inner Critic Cost Calculator Start -->
 <div id="costSavingsCalculator">
-<div class="calculator-header">
-<h2>Cost Savings Calculator</h2>
+    <div class="calculator-header">
+        <h2>Inner Critic Cost Calculator</h2>
+    </div>
+    <div class="calculator-container">
+        <!-- Input Section -->
+        <div class="calculator-inputs">
+            <div class="input-group">
+                <label for="employees">
+                    <i class="fas fa-users"></i> Number of Employees
+                    <span class="info-circle" data-tooltip="Total number of employees in your organization or team">ⓘ</span>
+                </label>
+                <input type="number" id="employees" value="10" min="1" step="1">
+            </div>
+            <div class="input-group">
+                <label for="annualSalary">
+                    <i class="fas fa-dollar-sign"></i> Average Annual Salary ($)
+                    <span class="info-circle" data-tooltip="Average yearly salary per employee before taxes and benefits">ⓘ</span>
+                </label>
+                <input type="number" id="annualSalary" value="48000" min="0" step="1000">
+            </div>
+            <div class="input-group">
+                <label for="ruminationHours">
+                    <i class="fas fa-clock"></i> Weekly Rumination Hours per Employee
+                    <span class="info-circle" data-tooltip="Average hours per week each employee spends dwelling on negative thoughts or self-criticism">ⓘ</span>
+                </label>
+                <input type="number" id="ruminationHours" value="2" min="0" step="0.5">
+            </div>
+            <div class="input-group">
+                <label for="sickDays">
+                    <i class="fas fa-bed"></i> Annual Sick Days per Employee
+                    <span class="info-circle" data-tooltip="Average number of sick days taken by each employee per year">ⓘ</span>
+                </label>
+                <input type="number" id="sickDays" value="5" min="0" step="1">
+            </div>
+            <div class="input-group">
+                <label for="burnoutRate">
+                    <i class="fas fa-fire"></i> Annual Burnout Rate (%)
+                    <span class="info-circle" data-tooltip="Percentage of employees showing signs of burnout each year">ⓘ</span>
+                </label>
+                <input type="number" id="burnoutRate" value="20" min="0" max="100" step="1">
+            </div>
+            <div class="input-group">
+                <label for="turnoverRate">
+                    <i class="fas fa-door-open"></i> Annual Turnover Rate (%)
+                    <span class="info-circle" data-tooltip="Percentage of employees who leave the organization each year">ⓘ</span>
+                </label>
+                <input type="number" id="turnoverRate" value="15" min="0" max="100" step="1">
+            </div>
+            <div class="input-group">
+                <label for="collaborationDecline">
+                    <i class="fas fa-users-cog"></i> Collaboration Efficiency Decline (%)
+                    <span class="info-circle" data-tooltip="Estimated percentage decrease in team collaboration effectiveness due to inner critic issues">ⓘ</span>
+                </label>
+                <input type="number" id="collaborationDecline" value="10" min="0" max="100" step="1">
+            </div>
+            <div class="input-group">
+                <label for="teamOutput">
+                    <i class="fas fa-chart-line"></i> Monthly Team Output Value ($)
+                    <span class="info-circle" data-tooltip="Estimated monthly value of team's total output or productivity in dollars">ⓘ</span>
+                </label>
+                <input type="number" id="teamOutput" value="50000" min="0" step="1000">
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="calculator-results">
+            <h3>Annual Cost Impact</h3>
+            <div class="results-container">
+                <div class="result-item">
+                    <p>Rumination Cost</p>
+                    <p class="result-amount"><span id="ruminationCost">$ 0.00</span></p>
+                </div>
+                <div class="result-item">
+                    <p>Sick Day Cost</p>
+                    <p class="result-amount"><span id="sickDayCost">$ 0.00</span></p>
+                </div>
+                <div class="result-item">
+                    <p>Burnout Cost</p>
+                    <p class="result-amount"><span id="burnoutCost">$ 0.00</span></p>
+                </div>
+                <div class="result-item">
+                    <p>Turnover Cost</p>
+                    <p class="result-amount"><span id="turnoverCost">$ 0.00</span></p>
+                </div>
+                <div class="result-item">
+                    <p>Team Collaboration Cost</p>
+                    <p class="result-amount"><span id="collaborationCost">$ 0.00</span></p>
+                </div>
+                <div class="result-item">
+                    <p>Total Annual Impact</p>
+                    <p class="result-amount"><span id="totalCost">$ 0.00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="calculator-container">
-<div class="calculator-inputs">
-<div class="input-group">
-<label for="dailyHoursSaved"><i class="fas fa-clock"></i> Expected Hours Saved Per Day</label>
-<input type="number" id="dailyHoursSaved" value="1" min="0" step="0.1">
-</div>
-<div class="input-group">
-<label for="weeklyHoursSaved"><i class="fas fa-calendar-week"></i> Expected Hours Saved Per Week</label>
-<input type="number" id="weeklyHoursSaved" value="5" min="0" step="0.1">
-</div>
-<div class="input-group">
-<label for="employees"><i class="fas fa-users"></i> Number of Employees</label>
-<input type="number" id="employees" value="10" min="1" step="1">
-</div>
-<div class="input-group">
-<label for="monthlySalary"><i class="fas fa-dollar-sign"></i> Monthly Salary Per Employee ($)</label>
-<input type="number" id="monthlySalary" value="4000" min="0" step="100">
-</div>
-<div class="input-group">
-<label for="weeklyHours"><i class="fas fa-business-time"></i> Weekly Work Hours</label>
-<input type="number" id="weeklyHours" value="40" min="1" step="1">
-</div>
-</div>
-<div class="calculator-results">
-<h3>Potential Savings</h3>
-<div class="results-container">
-<div class="result-item">
-<p>Weekly Savings</p>
-<p class="result-amount"><span id="weeklySavings">$ 0.00</span></p>
-</div>
-<div class="result-item">
-<p>Monthly Savings</p>
-<p class="result-amount"><span id="monthlySavings">$ 0.00</span></p>
-</div>
-<div class="result-item">
-<p>Annual Savings</p>
-<p class="result-amount"><span id="annualSavings">$ 0.00</span></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Add Font Awesome for the icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 <style>
 /* Add Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap');
+
 body {
-background-color: #f0f4f8;
-margin: 0;
-padding: 0;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
 }
+
 #costSavingsCalculator {
-max-width: 800px;
-margin: 40px auto;
-font-family: 'Roboto', sans-serif;
-color: #333;
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
 }
+
 .calculator-header {
-background-color: #2980b9;
-padding: 20px 20px;
-border-radius: 8px 8px 0 0;
-text-align: center;
+    background-color: #2980b9;
+    padding: 20px 20px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
 }
+
 .calculator-header h2 {
-margin: 0;
-color: #fff;
-font-family: 'Montserrat', sans-serif;
-font-size: 2em;
-font-weight: 700;
-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 .calculator-container {
-background: #fff;
-border-radius: 0 0 8px 8px;
-padding: 30px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa;
+    border-radius: 0 0 8px 8px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .calculator-inputs {
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
-margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
 }
+
 .input-group {
-flex: 1 1 calc(50% - 20px);
+    flex: 1 1 calc(50% - 20px);
 }
+
 .input-group label {
-display: block;
-font-weight: 500;
-margin-bottom: 8px;
-color: #34495e;
-font-size: 0.95em;
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-size: 0.95em;
 }
+
 .input-group label i {
-margin-right: 6px;
-color: #2980b9;
+    margin-right: 6px;
+    color: #2980b9;
 }
+
 .input-group input {
-width: 100%;
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 4px;
-transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
+
 .input-group input:focus,
 .input-group input:hover {
-border-color: #2980b9;
-box-shadow: 0 0 8px rgba(41, 128, 185, 0.2);
-outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.2);
+    outline: none;
 }
+
 .calculator-results h3 {
-margin-bottom: 20px;
-color: #2c3e50;
-font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-family: 'Montserrat', sans-serif;
 }
+
 .results-container {
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 30px;
 }
+
 .result-item {
-flex: 1 1 100%;
-background: #f9f9f9;
-padding: 20px;
-text-align: center;
-border-radius: 6px;
-border: 1px solid #e1e1e1;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #f0f4f8;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    grid-column: 1;
 }
-@media (min-width: 600px) {
-.result-item {
-flex: 1 1 calc(33% - 20px);
-}
-}
+
 .result-item:hover {
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
 }
+
 .result-item p {
-margin: 0;
-color: #7f8c8d;
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9em;
 }
+
 .result-item .result-amount {
-font-size: 2em;
-font-weight: bold;
-color: #2ecc71; /* Bright green */
-margin-top: 10px;
-white-space: nowrap;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #e57373;
+    margin-top: 4px;
+    white-space: nowrap;
 }
-@media (max-width: 600px) {
-.calculator-inputs,
-.results-container {
-flex-direction: column;
+
+.result-item:last-child {
+    grid-column: 1 / -1;
+    background: #fff5f5;
 }
-.input-group,
-.result-item {
-flex: 1 1 100%;
+
+.result-item:last-child .result-amount {
+    color: #c0392b;
+    font-size: 1.6em;
 }
+
+/* Info Circle Styles */
+.info-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #2980b9;
+    color: white;
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: help;
+    position: relative;
+}
+
+.info-circle:hover {
+    background-color: #3498db;
+}
+
+.info-circle:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    top: -35px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+    .calculator-inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-container {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
+
 <script>
 (function() {
-// Get input elements
-const dailyHoursSavedInput = document.getElementById('dailyHoursSaved');
-const weeklyHoursSavedInput = document.getElementById('weeklyHoursSaved');
-const employeesInput = document.getElementById('employees');
-const monthlySalaryInput = document.getElementById('monthlySalary');
-const weeklyHoursInput = document.getElementById('weeklyHours');
-// Get output elements
-const weeklySavingsOutput = document.getElementById('weeklySavings');
-const monthlySavingsOutput = document.getElementById('monthlySavings');
-const annualSavingsOutput = document.getElementById('annualSavings');
-let isUpdating = false;
-// Function to format numbers without unnecessary decimals
-function formatNumber(num) {
-if (num % 1 === 0) {
-return num.toString();
-} else {
-return num.toFixed(2);
-}
-}
-// Function to sync daily and weekly hours
-function syncHours(source) {
-if (isUpdating) return;
-isUpdating = true;
-if (source === 'daily') {
-const dailyHours = parseFloat(dailyHoursSavedInput.value) || 0;
-const weeklyHours = dailyHours * 5;
-weeklyHoursSavedInput.value = formatNumber(weeklyHours);
-} else if (source === 'weekly') {
-const weeklyHours = parseFloat(weeklyHoursSavedInput.value) || 0;
-const dailyHours = weeklyHours / 5;
-dailyHoursSavedInput.value = formatNumber(dailyHours);
-}
-isUpdating = false;
-calculateSavings();
-}
-// Function to validate input values
-function getValidatedNumber(value) {
-const number = parseFloat(value);
-return isNaN(number) ? null : number;
-}
-// Calculation function
-function calculateSavings() {
-// Input values
-const expectedHoursSavedWeekly = getValidatedNumber(weeklyHoursSavedInput.value);
-const employees = parseInt(employeesInput.value, 10);
-const monthlySalary = getValidatedNumber(monthlySalaryInput.value);
-const weeklyHours = getValidatedNumber(weeklyHoursInput.value);
-// Validate input values
-if (
-expectedHoursSavedWeekly === null ||
-employees === null ||
-monthlySalary === null ||
-weeklyHours === null ||
-weeklyHours <= 0
-) {
-// Reset results for invalid input
-weeklySavingsOutput.textContent = '$ 0.00';
-monthlySavingsOutput.textContent = '$ 0.00';
-annualSavingsOutput.textContent = '$ 0.00';
-return;
-}
-// Constants
-const weeksPerMonth = 52 / 12;
-// Calculations
-const denominator = weeksPerMonth * weeklyHours;
-if (denominator === 0) {
-alert('Weekly work hours cannot be zero.');
-return;
-}
-const hourlyRate = monthlySalary / denominator;
-const weeklyCostSavings = expectedHoursSavedWeekly * hourlyRate * employees;
-const monthlyCostSavings = (weeklyCostSavings * 52) / 12;
-const annualCostSavings = monthlyCostSavings * 12;
-// Update output with animation
-animateValue(weeklySavingsOutput, parseFloat(weeklySavingsOutput.getAttribute('data-value')) || 0, weeklyCostSavings, 500);
-animateValue(monthlySavingsOutput, parseFloat(monthlySavingsOutput.getAttribute('data-value')) || 0, monthlyCostSavings, 500);
-animateValue(annualSavingsOutput, parseFloat(annualSavingsOutput.getAttribute('data-value')) || 0, annualCostSavings, 500);
-// Store new values
-weeklySavingsOutput.setAttribute('data-value', weeklyCostSavings);
-monthlySavingsOutput.setAttribute('data-value', monthlyCostSavings);
-annualSavingsOutput.setAttribute('data-value', annualCostSavings);
-}
-// Animation function
-function animateValue(element, start, end, duration) {
-let startTimestamp = null;
-const step = (timestamp) => {
-if (!startTimestamp) startTimestamp = timestamp;
-const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-const value = start + (end - start) * progress;
-element.textContent = formatCurrency(value);
-if (progress < 1) {
-window.requestAnimationFrame(step);
-}
-};
-window.requestAnimationFrame(step);
-}
-// Function to format numbers as currency
-function formatCurrency(num) {
-return num.toLocaleString('en-US', {
-style: 'currency',
-currency: 'USD',
-minimumFractionDigits: 2,
-maximumFractionDigits: 2
-});
-}
-// Event listeners for real-time calculation and synchronization
-dailyHoursSavedInput.addEventListener('input', function() {
-syncHours('daily');
-});
-weeklyHoursSavedInput.addEventListener('input', function() {
-syncHours('weekly');
-});
-employeesInput.addEventListener('input', calculateSavings);
-monthlySalaryInput.addEventListener('input', calculateSavings);
-weeklyHoursInput.addEventListener('input', calculateSavings);
-// Initial calculation
-calculateSavings();
+    // Get input elements
+    const employeesInput = document.getElementById('employees');
+    const annualSalaryInput = document.getElementById('annualSalary');
+    const ruminationHoursInput = document.getElementById('ruminationHours');
+    const sickDaysInput = document.getElementById('sickDays');
+    const burnoutRateInput = document.getElementById('burnoutRate');
+    const turnoverRateInput = document.getElementById('turnoverRate');
+    const collaborationDeclineInput = document.getElementById('collaborationDecline');
+    const teamOutputInput = document.getElementById('teamOutput');
+
+    // Get output elements
+    const ruminationCostOutput = document.getElementById('ruminationCost');
+    const sickDayCostOutput = document.getElementById('sickDayCost');
+    const burnoutCostOutput = document.getElementById('burnoutCost');
+    const turnoverCostOutput = document.getElementById('turnoverCost');
+    const collaborationCostOutput = document.getElementById('collaborationCost');
+    const totalCostOutput = document.getElementById('totalCost');
+
+    // Function to format numbers as currency
+    function formatCurrency(num) {
+        return num.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+
+    // Function to clamp percentage values between 0 and 100
+    function clampPercentage(value) {
+        const number = parseFloat(value);
+        if (isNaN(number)) return 0;
+        return Math.min(Math.max(number, 0), 100);
+    }
+
+    // Function to get validated number
+    function getValidatedNumber(value, isPercentage = false) {
+        if (isPercentage) {
+            return clampPercentage(value);
+        }
+        const number = parseFloat(value);
+        return isNaN(number) ? 0 : number;
+    }
+
+    // Animation function for updating values
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = start + (end - start) * progress;
+            element.textContent = formatCurrency(value);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // Main calculation function
+    function calculateCosts() {
+        // Get input values
+        const employees = getValidatedNumber(employeesInput.value);
+        const annualSalary = getValidatedNumber(annualSalaryInput.value);
+        const ruminationHours = getValidatedNumber(ruminationHoursInput.value);
+        const sickDays = getValidatedNumber(sickDaysInput.value);
+        const burnoutRate = getValidatedNumber(burnoutRateInput.value, true) / 100;
+        const turnoverRate = getValidatedNumber(turnoverRateInput.value, true) / 100;
+        const collaborationDecline = getValidatedNumber(collaborationDeclineInput.value, true) / 100;
+        const teamOutput = getValidatedNumber(teamOutputInput.value);
+
+        // Calculate hourly wage
+        const hourlyWage = annualSalary / (52 * 40); // Assuming 52 weeks, 40 hours per week
+
+        // Calculate individual costs
+        const ruminationCost = (ruminationHours * hourlyWage * employees) * 52;
+        const sickDayCost = (sickDays * hourlyWage * 8) * employees;
+        const burnoutCost = (employees * burnoutRate) * (annualSalary * 0.2);
+        const turnoverCost = (employees * turnoverRate) * (annualSalary * 0.3);
+        const collaborationCost = (teamOutput * collaborationDecline) * 12;
+
+        // Calculate total cost
+        const totalCost = ruminationCost + sickDayCost + burnoutCost + turnoverCost + collaborationCost;
+
+        // Update display with animation
+        animateValue(ruminationCostOutput, parseFloat(ruminationCostOutput.getAttribute('data-value')) || 0, ruminationCost, 500);
+        animateValue(sickDayCostOutput, parseFloat(sickDayCostOutput.getAttribute('data-value')) || 0, sickDayCost, 500);
+        animateValue(burnoutCostOutput, parseFloat(burnoutCostOutput.getAttribute('data-value')) || 0, burnoutCost, 500);
+        animateValue(turnoverCostOutput, parseFloat(turnoverCostOutput.getAttribute('data-value')) || 0, turnoverCost, 500);
+        animateValue(collaborationCostOutput, parseFloat(collaborationCostOutput.getAttribute('data-value')) || 0, collaborationCost, 500);
+        animateValue(totalCostOutput, parseFloat(totalCostOutput.getAttribute('data-value')) || 0, totalCost, 500);
+
+        // Store new values
+        ruminationCostOutput.setAttribute('data-value', ruminationCost);
+        sickDayCostOutput.setAttribute('data-value', sickDayCost);
+        burnoutCostOutput.setAttribute('data-value', burnoutCost);
+        turnoverCostOutput.setAttribute('data-value', turnoverCost);
+        collaborationCostOutput.setAttribute('data-value', collaborationCost);
+        totalCostOutput.setAttribute('data-value', totalCost);
+    }
+
+    // Add event listeners for percentage inputs to update their values when they change
+    const percentageInputs = [burnoutRateInput, turnoverRateInput, collaborationDeclineInput];
+    percentageInputs.forEach(input => {
+        input.addEventListener('change', function() {
+            this.value = clampPercentage(this.value);
+        });
+    });
+
+    // Add event listeners for all inputs
+    const inputs = document.querySelectorAll('.input-group input');
+    inputs.forEach(input => {
+        input.addEventListener('input', calculateCosts);
+    });
+
+    // Initial calculation
+    calculateCosts();
 })();
 </script>
-<!-- Cost Savings Calculator End -->
+
+</body>
 </html>
